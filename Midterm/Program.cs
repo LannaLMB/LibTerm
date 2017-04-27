@@ -10,8 +10,13 @@ namespace Midterm
     {
         static void Main(string[] args)
         {
-            // Change Console Color
+            // Change Font Color
             Console.ForegroundColor = ConsoleColor.DarkBlue;
+
+            // Declare Console Title
+            Console.Title = ("Grand Library Terminal");
+
+
 
 
             // Welcome Message
@@ -26,27 +31,127 @@ namespace Midterm
 
 
             // Call Get Option Method to Show Menu and Get User Input
-            GetOption();
+            GetOptionNum();
+            string UserChoice = GetOptionString();
 
+            Console.Write($"You Chose" + UserChoice);
 
 
 
         }
-
 
 
 
 
         // **********  Methods Begin Here  ********** \\
 
-        public static int GetOption()
+
+        // Method to Get User Option of What They Would Like to Do Within The Menu
+        public static int GetOptionNum()
         {
             int Option;
             // User Chooses to Check In a Book, Check Out a Book, Donate a Book, or Search for a Book
             Console.WriteLine("What Can We Help You With Today at The Grand Library?\n");
-            Console.Write("\t1.)\tCheck-Out a Book\n\t2.)\tReturn a Book\n\t3.)\tSearch for a Book by Title\n\t4.)\tSearch for a Book by Author\n\nPlease Type the Number Associated With The Option You'd Like\n   ----->  ");
-            Option = Validation.GetRange(1, 4);
+            Console.Write("\n\t1.)\tCheck-Out a Book\n\t2.)\tReturn a Book\n\t3.)\tSearch for a Book by Title\n\t4.)\tSearch for a Book by Author\n\t5.)\tDonate A Book\n\n\nPlease Type the Number Associated With The Option You'd Like\n\n   ----->  ");
+            Option = Validation.GetRange(1, 5);
             return Option;
+
         }
+
+
+        public static string GetOptionString()
+        {
+
+            string MenuValue = "";
+            int Option = 0;
+
+            if (Option == 1)
+            {
+                MenuValue = "You Chose The Option To Check-Out A Book.";
+            }
+
+            else if (Option == 2)
+            {
+                MenuValue = "You Chose The Option To Return A Book.";
+            }
+
+            else if (Option == 3)
+            {
+                MenuValue = "You Chose The Option To Search For A Book By Title.";
+            }
+
+            else if (Option == 4)
+            {
+                MenuValue = "You Chose The Option To Search For A Book By Author.";
+            }
+
+            else if (Option == 5)
+            {
+                MenuValue = "You Chose The Option To Donate A Book.";
+            }
+
+            return MenuValue;
+        }
+
+            //int choice = 0;
+            //string UserChoice = "";
+
+            //switch (choice)
+            //{
+            //    case 1:
+            //        GetOptionNum() = 1;
+            //        Console.Write("You Chose The Option To Check-Out A Book.");
+            //        break;
+
+            //    case 2:
+            //        UserChoice = 2;
+            //        Console.Write("You Chose The Option To Return A Book.");
+            //        break;
+
+            //    case 3:
+            //        UserChoice = 3;
+            //        Console.Write("You Chose The Option To Search For A Book By Title.");
+            //        break;
+
+            //    case 4:
+            //        UserChoice = 4;
+            //        Console.Write("You Chose The Option To Search For A Book By Author.");
+            //        break;
+
+            //    case 5:
+            //        UserChoice = 5;
+            //        Console.Write("You Chose The Option To Donate A Book.");
+            //        break;
+        //    }
+
+        //    return choice;
+        //}
+
+
+
+        //// Method to Gte Book Status
+        //public static StatusValues GetBookStatus()
+        //{
+
+        //    int choice = 0;
+
+        //    StatusValues UserChoice = StatusValues.Available;
+
+        //    switch (choice)
+        //    {
+        //        case 1:
+        //            UserChoice = StatusValues.Available;
+        //            break;
+
+        //        case 2:
+        //            UserChoice = StatusValues.CheckedOut;
+        //            break;
+
+        //    }
+
+        //    return UserChoice;
+        //}
+
     }
 }
+

@@ -23,7 +23,7 @@ namespace Midterm
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine();
                 Console.Write("You Must Select A Valid Number From The Menu:  --->   ");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
 
             }
             return number;
@@ -42,7 +42,7 @@ namespace Midterm
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"You MUST Enter a Number That is in Between {min} and {max}  --->   ");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 number = GetValidInt();
             }
             return number;
