@@ -8,5 +8,9 @@ namespace Midterm
 {
     class Books
     {
+
+
+        string Author;
+        string Title;
     }
 }
