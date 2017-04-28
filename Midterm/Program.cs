@@ -179,6 +179,7 @@ namespace Midterm
                 string Status = book[2];
                 Catalogue.Add(new Books(Author, Title, Status));
             }
+            reader.Close();
             return Catalogue;
         }
 
@@ -208,6 +209,14 @@ namespace Midterm
             return InputList;
         }
 
+
+        // Method To Write To File
+        public static void WriteToFile(string input)
+        {
+            StreamWriter sw = new StreamWriter("../../TextFile1.txt", true);  // Relative Path
+            sw.WriteLine(input);
+            sw.Close();  // Resource Management
+        }
 
 
         //// Method to Get Book Status
