@@ -6,13 +6,10 @@
 
 
 // ****** TO DO:
-// read the whole text file 
 
 // split into lines 
 
-// split each line into columns 
-
-// putb the column info into an abject of type book 
+// put the column info into anoabject of type book 
 
 // put the book into ur list 
 
@@ -50,7 +47,6 @@ namespace Midterm
             {
                 // Call Get Option Method to Show Menu and Get User Input
                 GetOption();
-                GetInfo();
 
 
 
@@ -63,7 +59,7 @@ namespace Midterm
             }
         }
 
-        
+
 
 
 
@@ -79,7 +75,7 @@ namespace Midterm
 
             // User Chooses to Check In a Book, Check Out a Book, Donate a Book, or Search for a Book
             string[] MenuValues = { "Check-Out a Book", "Return a Book", "Search for a Book by Title", "Search for a Book by Author", "Donate a Book" };
-            
+
             // Print List of Menu Values with Select Numbers
             for (int i = 0; i < MenuValues.Length; i++)
             {
@@ -93,10 +89,60 @@ namespace Midterm
 
 
             // User Choice Output
+            string Choice;
             Option = Validation.GetRange(1, 5);
             Console.WriteLine();
             Console.WriteLine($"\nYou Chose The Option To {MenuValues[Option - 1]}.\n\n");
+
+            if (Option == 1)
+            {
+
+                // User Input
+                Console.WriteLine("Please Select a Book to Check Out From the List Below:");
+                Console.WriteLine("-------------------------------------------------------------\n");
+
+                // Show User List of Books to Choose From
+                GetList();
+                Console.WriteLine("\n");
+                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+            }
+
+            else if (Option == 2)
+            {
+
+                Console.Write("Please Type in The Title of The Book You Are Returning:\n---->  ");
+                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+
+                Console.WriteLine("Thank You For Returning " + Choice);
+            }
+
+            else if (Option == 3)
+            {
+
+                Console.WriteLine("Please Type in The Name of The Book You Are Looking For:\n---->  ");
+                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+            }
+
+            else if (Option == 4)
+            {
+
+                Console.WriteLine("Please Type in The Author of The Book You Are Looking For:\n---->  ");
+                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+            }
+
+            else if (Option == 5)
+            {
+                string ChoiceTitle;
+                string ChoiceAuthor;
+                Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
+                Console.Write("Book Title: ");
+                ChoiceTitle = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Console.Write("Book Author: ");
+                ChoiceAuthor = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By" + ChoiceAuthor);
+            }
         }
+
 
 
 
@@ -125,89 +171,32 @@ namespace Midterm
                 Console.WriteLine("Status:\t" + item.BStatus);
                 Console.WriteLine("\n=====================================\n");
             }
-
-
         }
 
 
 
+        //// Method to Get Book Status
+        //public static StatusValues GetBookStatus()
+        //{
 
-        // Method to Allow User to Go Forward With Their Choice
-        public static void GetInfo()
-        {
-            int Option = 1;
-            string Choice = "";
+        //    int choice = 0;
 
-            if (Option == 1)
-            {
+        //    StatusValues UserChoice = StatusValues.Available;
 
-                // User Input
-                Console.WriteLine("Please Select a Book to Check Out From the List Below:");
-                Console.WriteLine("-------------------------------------------------------------\n");
+        //    switch (choice)
+        //    {
+        //        case 1:
+        //            UserChoice = StatusValues.Available;
+        //            break;
 
-                // Show User List of Books to Choose From
-                GetList();
-                Console.WriteLine("\n");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
-            }
+        //        case 2:
+        //            UserChoice = StatusValues.CheckedOut;
+        //            break;
+        //    }
 
-            else if (Option == 2)
-            {
-
-                Console.WriteLine("Please Type in The Title of The Book You Are Returning:\n");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
-                Console.WriteLine("Thank You For Returning " + Choice);
-            }
-
-            else if (Option == 3)
-            {
-
-                Console.WriteLine("Please Type in The Name of The Book You Are Looking For:\n");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
-            }
-
-            else if (Option == 4)
-            {
-
-                Console.WriteLine("Please Type in The Author of The Book You Are Looking For:\n");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
-            }
-
-            else if (Option == 5)
-            {
-                string ChoiceTitle;
-                string ChoiceAuthor;
-                Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
-                Console.WriteLine("Book Title: ");
-                ChoiceTitle = Validation.GetValidString(Console.ReadLine().ToUpper());
-                Console.WriteLine("Book Author: ");
-                ChoiceAuthor = Validation.GetValidString(Console.ReadLine().ToUpper());
-            }
-        }
-
-
-
-        // Method to Get Book Status
-        public static StatusValues GetBookStatus()
-        {
-
-            int choice = 0;
-
-            StatusValues UserChoice = StatusValues.Available;
-
-            switch (choice)
-            {
-                case 1:
-                    UserChoice = StatusValues.Available;
-                    break;
-
-                case 2:
-                    UserChoice = StatusValues.CheckedOut;
-                    break;
-            }
-
-            return UserChoice;
-        }
+        //    return UserChoice;
+        //}
     }
 }
+
 
