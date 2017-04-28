@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,10 +95,40 @@ namespace Midterm
             // User Choice Output
             Option = Validation.GetRange(1, 5);
             Console.WriteLine();
-            Console.WriteLine($"You Chose The Option To {MenuValues[Option - 1]}.");
-            Console.WriteLine("-----------------------------------------------------------------------------\n");
-            //Console.WriteLine(GetInfo());
+            Console.WriteLine($"\nYou Chose The Option To {MenuValues[Option - 1]}.\n\n");
         }
+
+
+
+        // Method to Populate List of Books
+        public static void GetList()
+        {
+            //new list called catalogue
+            List<Books> Catalogue = new List<Books>();
+            StreamReader reader = new StreamReader("../../TextFile1.txt ");
+            //this is one line from text file or one book
+            char[] comma = { ',' };
+            for (int i = 0; i < 12; i++)
+
+            {
+                string line = reader.ReadLine();
+                string[] book = line.Split(comma);
+                string Author = book[0];
+                string Title = book[1];
+                string Status = book[2];
+                Catalogue.Add(new Books(Author, Title, Status));
+            }
+            foreach (var item in Catalogue)
+            {
+                Console.WriteLine("Title:\t" + item.BAuthor);
+                Console.WriteLine("Author:\t" + item.BTitle);
+                Console.WriteLine("Status:\t" + item.BStatus);
+                Console.WriteLine("\n=====================================\n");
+            }
+
+
+        }
+
 
 
 
@@ -110,8 +141,13 @@ namespace Midterm
             if (Option == 1)
             {
 
-                // Print List of Books Here
-                Console.WriteLine("Please Select a Book to Check Out From the List Above:\n");
+                // User Input
+                Console.WriteLine("Please Select a Book to Check Out From the List Below:");
+                Console.WriteLine("-------------------------------------------------------------\n");
+
+                // Show User List of Books to Choose From
+                GetList();
+                Console.WriteLine("\n");
                 Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
             }
 
@@ -139,12 +175,14 @@ namespace Midterm
 
             else if (Option == 5)
             {
-
+                string ChoiceTitle;
+                string ChoiceAuthor;
                 Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Console.WriteLine("Book Title: ");
+                ChoiceTitle = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Console.WriteLine("Book Author: ");
+                ChoiceAuthor = Validation.GetValidString(Console.ReadLine().ToUpper());
             }
-
-            //return Choice;
         }
 
 
