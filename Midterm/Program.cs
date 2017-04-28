@@ -53,7 +53,7 @@ namespace Midterm
                 // Continue Loop
                 if (!Validation.GetContinue())
                 {
-
+                    Console.WriteLine("Thanks And Have A Great Day!!");
                     return;
                 }
             }
@@ -94,42 +94,49 @@ namespace Midterm
             Console.WriteLine();
             Console.WriteLine($"\nYou Chose The Option To {MenuValues[Option - 1]}.\n\n");
 
+
+            // ***** Functions For Each Option ***** //
+            // Function For Option #1
             if (Option == 1)
             {
-
                 // User Input
                 Console.WriteLine("Please Select a Book to Check Out From the List Below:");
                 Console.WriteLine("-------------------------------------------------------------\n");
 
                 // Show User List of Books to Choose From
                 GetList();
-                Console.WriteLine("\n");
+                Console.Write("\n---->  ");
                 Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Console.WriteLine("\nThank You For Checking Out " + Choice + ".  The Due Date is Two Weeks From Today's Date.");
             }
 
+
+            // Function For Option #2
             else if (Option == 2)
             {
-
                 Console.Write("Please Type in The Title of The Book You Are Returning:\n---->  ");
                 Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
-
                 Console.WriteLine("Thank You For Returning " + Choice);
             }
 
+
+            // Function For Option #3
             else if (Option == 3)
             {
-
                 Console.WriteLine("Please Type in The Name of The Book You Are Looking For:\n---->  ");
                 Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
             }
 
+
+            // Function For Option #4
             else if (Option == 4)
             {
-
                 Console.WriteLine("Please Type in The Author of The Book You Are Looking For:\n---->  ");
                 Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
             }
 
+
+            // Function For Option #5
             else if (Option == 5)
             {
                 string ChoiceTitle;
@@ -139,7 +146,7 @@ namespace Midterm
                 ChoiceTitle = Validation.GetValidString(Console.ReadLine().ToUpper());
                 Console.Write("Book Author: ");
                 ChoiceAuthor = Validation.GetValidString(Console.ReadLine().ToUpper());
-                Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By" + ChoiceAuthor);
+                Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
             }
         }
 
@@ -166,8 +173,8 @@ namespace Midterm
             }
             foreach (var item in Catalogue)
             {
-                Console.WriteLine("Title:\t" + item.BAuthor);
-                Console.WriteLine("Author:\t" + item.BTitle);
+                Console.WriteLine("Title:\t" + item.BTitle);
+                Console.WriteLine("Author:\t" + item.BAuthor);
                 Console.WriteLine("Status:\t" + item.BStatus);
                 Console.WriteLine("\n=====================================\n");
             }
