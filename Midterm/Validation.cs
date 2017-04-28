@@ -54,16 +54,20 @@ namespace Midterm
 
 
         //Input Method
-        public static string GetValidString(string Choice)
+        public static string GetValidString()
         {
-          
+            string Input = Console.ReadLine().ToUpper();
+
             // Validates There is User Input
-            if ((string.IsNullOrEmpty(Choice)) || (string.IsNullOrWhiteSpace(Choice)))
+            while ((string.IsNullOrEmpty(Input)) || (string.IsNullOrWhiteSpace(Input)))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You Must Enter Words!");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Input = Console.ReadLine().ToUpper();
             }
 
-            return Choice;
+            return Input;
                 
         }
 

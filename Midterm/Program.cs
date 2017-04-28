@@ -45,8 +45,11 @@ namespace Midterm
             // Start of Continue Loop
             while (true)
             {
+
                 // Call Get Option Method to Show Menu and Get User Input
                 GetOption();
+
+
 
 
 
@@ -104,9 +107,9 @@ namespace Midterm
                 Console.WriteLine("-------------------------------------------------------------\n");
 
                 // Show User List of Books to Choose From
-                GetList();
+                PrintList(GetList());
                 Console.Write("\n---->  ");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Choice = Validation.GetValidString();
                 Console.WriteLine("\nThank You For Checking Out " + Choice + ".  The Due Date is Two Weeks From Today's Date.");
             }
 
@@ -115,7 +118,7 @@ namespace Midterm
             else if (Option == 2)
             {
                 Console.Write("Please Type in The Title of The Book You Are Returning:\n---->  ");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Choice = Validation.GetValidString();
                 Console.WriteLine("Thank You For Returning " + Choice);
             }
 
@@ -124,7 +127,7 @@ namespace Midterm
             else if (Option == 3)
             {
                 Console.WriteLine("Please Type in The Name of The Book You Are Looking For:\n---->  ");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Choice = Validation.GetValidString();
             }
 
 
@@ -132,7 +135,7 @@ namespace Midterm
             else if (Option == 4)
             {
                 Console.WriteLine("Please Type in The Author of The Book You Are Looking For:\n---->  ");
-                Choice = Validation.GetValidString(Console.ReadLine().ToUpper());
+                Choice = Validation.GetValidString();
             }
 
 
@@ -143,9 +146,13 @@ namespace Midterm
                 string ChoiceAuthor;
                 Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
                 Console.Write("Book Title: ");
-                ChoiceTitle = Validation.GetValidString(Console.ReadLine().ToUpper());
+                ChoiceTitle = Validation.GetValidString();
                 Console.Write("Book Author: ");
-                ChoiceAuthor = Validation.GetValidString(Console.ReadLine().ToUpper());
+                ChoiceAuthor = Validation.GetValidString();
+                string Status = ("Available");
+                List<Books> NewList = new List<Books>();
+                NewList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status));
+                List<Books> DonationList = AddBook(GetList());
                 Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
             }
         }
@@ -154,8 +161,9 @@ namespace Midterm
 
 
         // Method to Populate List of Books
-        public static void GetList()
+        public static List<Books> GetList()
         {
+
             //new list called catalogue
             List<Books> Catalogue = new List<Books>();
             StreamReader reader = new StreamReader("../../TextFile1.txt ");
@@ -171,13 +179,33 @@ namespace Midterm
                 string Status = book[2];
                 Catalogue.Add(new Books(Author, Title, Status));
             }
-            foreach (var item in Catalogue)
+            return Catalogue;
+        }
+
+
+
+        // Method To Print List
+        public static void PrintList(List<Books> InputList)
+        {
+            foreach (var item in InputList)
             {
                 Console.WriteLine("Title:\t" + item.BTitle);
                 Console.WriteLine("Author:\t" + item.BAuthor);
                 Console.WriteLine("Status:\t" + item.BStatus);
                 Console.WriteLine("\n=====================================\n");
             }
+        }
+
+
+
+        // Method to Add a Book
+        public static List<Books> AddBook(List<Books> InputList)
+        {
+            string Title = Validation.GetValidString();
+            string Author = Validation.GetValidString();
+            string Status = "Available";
+            InputList.Add(new Books(Title, Author, Status));
+            return InputList;
         }
 
 
