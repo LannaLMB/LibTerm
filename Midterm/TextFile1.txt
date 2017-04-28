@@ -5,7 +5,7 @@ Thirteen Reasons Why,Jay Asher,Available,Checked Out
 The Third Wave,Steve Case,Available,Checked Out
 Cat and the Hat,Dr.Seuss,Available,Checked Out
 Green Eggs and Ham,Dr.Seuss,Available,Checked Out
-How the Grinch Stole Christmas,Available,Checked Out
+How the Grinch Stole Christmas,Dr.Seuss,Available,Checked Out
 Anything is Possible,Elizabeth Strout,Available,Checked Out
 The Secrets of My Life,Caitlyn Jenner,Available,Checked Out
 Come Sundown,Nora Roberts,Available,Checked Out

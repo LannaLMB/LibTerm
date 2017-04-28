@@ -27,18 +27,46 @@ namespace Midterm
             // Declare Variables
 
 
+            // List of Books
+            List<Books> BookList = new List<Books>();
+
+            // read the whole text file 
+
+            // split into lines 
+
+            // split each line into columns 
+
+            // putb the column info into an abject of type book 
+
+            // put the book into ur list 
+
+            //BookList.Add(new Books("Harry Potter and the Curse", "J.K.Rowling", "Available"));
+            //BookList.Add(new Books("Red Rain", "R.L.Stine", "Available"));
+            //BookList.Add(new Books("Sixteenth Seduction", "James Patterson", "Available"));
+            //BookList.Add(new Books("Thirteen Reasons Why", "Jay Asher", "Available"));
+            //BookList.Add(new Books("The Third Wave", "Steve Case", "Available"));
+            //BookList.Add(new Books("Cat and the Hat", "Dr. Seuss", "Available"));
+            //BookList.Add(new Books("Green Eggs and Ham", "Dr. Seuss", "Available"));
+            //BookList.Add(new Books("How the Grinch Stole Christmas", "Dr. Seuss", "Available"));
+            //BookList.Add(new Books("Anything is Possible", "Elizabeth Strout", "Available"));
+            //BookList.Add(new Books("The Secrets of My Life", "Caitlyn Jenner", "Available"));
+            //BookList.Add(new Books("The Black Book", "James Patterson", "Available"));
+            //BookList.Add(new Books("Hundred Years of Solitude", "Gabiel Garcia Marquez", "Available"));
+            //BookList.Add(new Books("Gone Girl", "Gillian Flynn", "Available"));
+
+            Console.Write(BookList);
+
 
 
 
             // Call Get Option Method to Show Menu and Get User Input
             GetOptionNum();
-            string UserChoice = GetOptionString();
+            int UserChoice = GetOptionNum();
 
-            Console.Write($"You Chose" + UserChoice);
-
-
-
+            Console.Write($"You Chose " + UserChoice);
         }
+
+        
 
 
 
@@ -49,13 +77,13 @@ namespace Midterm
         // Method to Get User Option of What They Would Like to Do Within The Menu
         public static int GetOptionNum()
         {
+
             int Option;
             // User Chooses to Check In a Book, Check Out a Book, Donate a Book, or Search for a Book
             Console.WriteLine("What Can We Help You With Today at The Grand Library?\n");
             Console.Write("\n\t1.)\tCheck-Out a Book\n\t2.)\tReturn a Book\n\t3.)\tSearch for a Book by Title\n\t4.)\tSearch for a Book by Author\n\t5.)\tDonate A Book\n\n\nPlease Type the Number Associated With The Option You'd Like\n\n   ----->  ");
             Option = Validation.GetRange(1, 5);
             return Option;
-
         }
 
 
@@ -151,6 +179,11 @@ namespace Midterm
 
         //    return UserChoice;
         //}
+
+
+
+        
+
 
     }
 }
