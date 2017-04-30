@@ -28,7 +28,7 @@ namespace Midterm
         {
 
             // Change Font Color
-           // Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
 
 
             // Declare Console Title
@@ -49,9 +49,6 @@ namespace Midterm
 
                 // Call Get Option Method to Show Menu and Get User Input
                 GetOption();
-
-
-
 
 
                 // Continue Loop
@@ -148,30 +145,26 @@ namespace Midterm
             else if (Option == 4)
             {
                 Console.WriteLine("Please Type in The Author of The Book You Are Looking For:\n---->  ");
-                Choice = Validation.GetValidString();
+                Choice = SearchByAuthor();
             }
 
 
             // Function For Option #5
             else if (Option == 5)
             {
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> f055b137faff36f3a35824cc8432e3b5af534ae2
-                //string ChoiceTitle;
-                //string ChoiceAuthor;
-                //Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
-                //Console.Write("Book Title: ");
-                //ChoiceTitle = Validation.GetValidString();
-                //Console.Write("Book Author: ");
-                //ChoiceAuthor = Validation.GetValidString();
-                //string Status = ("Available");
-                //List<Books> NewList = new List<Books>();
-                //NewList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status));
-                //List<Books> DonationList = AddBook(GetList());
-                //Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
+                string ChoiceTitle;
+                string ChoiceAuthor;
+                Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
+                Console.Write("Book Title: ");
+                ChoiceTitle = Validation.GetValidString();
+                Console.Write("Book Author: ");
+                ChoiceAuthor = Validation.GetValidString();
+                string Status = ("Available");
+                List<Books> NewList = new List<Books>();
+                NewList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status));
+                List<Books> DonationList = AddBook(GetList());
+                Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
             }
         }
 
@@ -184,7 +177,8 @@ namespace Midterm
 
             //new list called catalogue
             List<Books> Catalogue = new List<Books>();
-            StreamReader reader = new StreamReader("../../TextFile1.txt ");
+            StreamReader reader = new StreamReader("../../OurDataBase.txt ");
+
             //this is one line from text file or one book
             char[] comma = { ',' };
             for (int i = 0; i < 14; i++)
@@ -202,6 +196,7 @@ namespace Midterm
             reader.Close();
             return Catalogue;
         }
+
 
 
 
@@ -231,26 +226,14 @@ namespace Midterm
         //}
 
 
-        // Method To Write To File
-        public static void WriteToText(List<Books> inputList)
-        {
-            StreamWriter sw = new StreamWriter("../../TextFile1.txt", false);
-
-            foreach (var item in inputList)
-            {
-                sw.WriteLine(item.BTitle + "," + item.BAuthor + "," + item.BStatus + ","
-                    + item.BDueDate);
-
-            }
-            sw.Close();
-        }
 
 
-
+        //This Method Passes in a List<Books> and it Prompts the User to Enter in a Title to Checkout, 
+        //it Then Goes and Changes the Values from Avaiable to Checked Out and Changes N/A to a Due Date (2 weeks)
         public static void Checkout(List<Books> inputCatalogue)
         {
-            Console.Write("Check out: ");
-            string ItemToCheckOut = Console.ReadLine().ToLower(); // add validation here
+            Console.Write("Please Enter The Name Of The Book You Would Like To Check Out: ");
+            string ItemToCheckOut = Validation.GetValidString(); // add validation here
             DateTime myDateTime = new DateTime();
             myDateTime = DateTime.Now;
             int count = 0;
@@ -259,20 +242,19 @@ namespace Midterm
                 string Titlelower = item.BTitle.ToLower();
                 if (Titlelower == ItemToCheckOut && !(item.BStatus == "Checked-out"))
                 {
-                    item.BStatus = "Checked-out";
+                    item.BStatus = "Book is Checked-out";
                     item.BDueDate = myDateTime.AddDays(14).ToShortDateString();
                     Console.WriteLine($"{item.BTitle} is checked out.");
-                    Console.WriteLine($"and is due on {item.BDueDate}");
+                    Console.WriteLine($"and is Due Back On {item.BDueDate}");
                 }
                 else
                 {
                     count++;
                 }
-
             }
             if (count == inputCatalogue.Count)
             {
-                Console.WriteLine("not available");
+                Console.WriteLine("Book is Not Available");
             }
 
             WriteToText(inputCatalogue);
@@ -280,9 +262,10 @@ namespace Midterm
         }
 
 
+        // This Returns a Book and Updates the Text File
         public static void Return(List<Books> inputCatalogue)
         {
-            Console.Write("Return: ");
+            Console.Write("Please Enter The Name Of The Book You Would Like To Return: ");
             string ItemToReturn = Console.ReadLine().ToLower();
             DateTime myDateTime = new DateTime();
             myDateTime = DateTime.Now;
@@ -294,7 +277,7 @@ namespace Midterm
                 {
                     item.BStatus = "Available";
                     item.BDueDate = "N/A";
-                    Console.WriteLine($"thank you for returning {item.BTitle}.");
+                    Console.WriteLine($"Thank You for Returning {item.BTitle}.");
                     //if (Convert.ToDouble(item.BDueDate) > Convert.ToDouble(myDateTime))
                     //{
                     //    Console.WriteLine("your item is late you owe us money");
@@ -304,40 +287,61 @@ namespace Midterm
                 {
                     count++;
                 }
-
             }
             if (count == inputCatalogue.Count)
             {
-                Console.WriteLine("that book is already returned or not in our system");
+                Console.WriteLine("That Book is Already Returned or Not in Our System.");
             }
-
             WriteToText(inputCatalogue);
-
-
         }
 
 
 
-        //// Method to Get Book Status
-        //public static StatusValues GetBookStatus()
-        //{
 
-        //    int choice = 0;
+        // This Method Writes Over the Text File - It is Called in the Return and Checkout Methods
+        public static void WriteToText(List<Books> inputList)
+        {
+            StreamWriter sw = new StreamWriter("../../OurDataBase.txt", false);
+            foreach (var item in inputList)
+            {
+                sw.WriteLine(item.BTitle + "," + item.BAuthor + "," + item.BStatus + ","
+                    + item.BDueDate);
+            }
+            sw.Close();
+        }
 
-        //    StatusValues UserChoice = StatusValues.Available;
 
-        //    switch (choice)
-        //    {
-        //        case 1:
-        //            UserChoice = StatusValues.Available;
-        //            break;
 
-        //        case 2:
-        //            UserChoice = StatusValues.CheckedOut;
-        //            break;
-        //    }
 
-        //    return UserChoice;
-        //}
+        // Search for Book by Author
+        public static void SearchByAuthor(List<Books> inputCatalogue)
+        {
+            Console.Write("Search by Author: ");
+            string AuthorSearch = Console.ReadLine().ToLower();
+
+            int count = 0;
+            foreach (var item in inputCatalogue)
+            {
+                string Titlelower = item.BAuthor.ToLower();
+                if (Titlelower == AuthorSearch)
+                {
+                    Console.WriteLine("Yes we have: ");
+                    Console.WriteLine("Title:\t" + item.BTitle);
+                    Console.WriteLine("Author:\t" + item.BAuthor);
+                    Console.WriteLine("Status:\t" + item.BStatus);
+                    Console.WriteLine("DueDate:\t" + item.BDueDate);
+                    Console.WriteLine("\n=====================================\n");
+                }
+                else
+                {
+                    count++;
+                }
+            }
+            if (count == inputCatalogue.Count)
+            {
+                Console.WriteLine("We Do Not Have That Title.");
+            }
+            WriteToText(inputCatalogue);
+        }
     }
 }

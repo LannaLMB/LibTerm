@@ -10,9 +10,5 @@ Anything is Possible,Elizabeth Strout,Checked-out,5/13/2017
 The Secrets of My Life,Caitlyn Jenner,Available,N/A
 Come Sundown,Nora Roberts,Checked-out,5/13/2017
 The Black Book,James Patterson,Checked-out,5/14/2017
-Hundred Years of Solitude,Gabiel Garcia Marquez,Available,N/A
-<<<<<<< HEAD
+Hundred Years of Solitude,Gabiel Garcia Marquez,Book is Checked-out,5/14/2017
 Gone Girl,Gillian Flynn,Available,N/A
-=======
-Gone Girl,Gillian Flynn,Checked-out,5/13/2017
->>>>>>> f055b137faff36f3a35824cc8432e3b5af534ae2
