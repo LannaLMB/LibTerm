@@ -28,7 +28,7 @@ namespace Midterm
         {
 
             // Change Font Color
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+           // Console.ForegroundColor = ConsoleColor.DarkBlue;
 
 
             // Declare Console Title
@@ -155,7 +155,11 @@ namespace Midterm
             // Function For Option #5
             else if (Option == 5)
             {
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> f055b137faff36f3a35824cc8432e3b5af534ae2
                 //string ChoiceTitle;
                 //string ChoiceAuthor;
                 //Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");

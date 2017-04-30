@@ -54,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TextFile1.txt" />
+<<<<<<< HEAD
+=======
+    <Content Include="Backup.txt" />
+>>>>>>> f055b137faff36f3a35824cc8432e3b5af534ae2
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
