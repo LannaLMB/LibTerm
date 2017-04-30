@@ -1,7 +1,7 @@
 ﻿/*  Midterm Project
  *  Library Terminal
  *  Group:  Lanna, Alex, Theresa
- *  Date Last Modified:  4/28/17
+ *  Date Last Modified:  4/30/17
  */
 
 
@@ -26,6 +26,7 @@ namespace Midterm
     {
         static void Main(string[] args)
         {
+
             // Change Font Color
             Console.ForegroundColor = ConsoleColor.DarkBlue;
 
@@ -106,20 +107,32 @@ namespace Midterm
                 Console.WriteLine("Please Select a Book to Check Out From the List Below:");
                 Console.WriteLine("-------------------------------------------------------------\n");
 
+
+
                 // Show User List of Books to Choose From
                 PrintList(GetList());
                 Console.Write("\n---->  ");
-                Choice = Validation.GetValidString();
-                Console.WriteLine("\nThank You For Checking Out " + Choice + ".  The Due Date is Two Weeks From Today's Date.");
+
+                Checkout(GetList());
+
+                //Choice = Validation.GetValidString();
+                //Console.WriteLine("\nThank You For Checking Out " + Choice + ".  The Due Date is Two Weeks From Today's Date.");
+
+
             }
 
 
             // Function For Option #2
             else if (Option == 2)
             {
+
+                PrintList(GetList());
                 Console.Write("Please Type in The Title of The Book You Are Returning:\n---->  ");
-                Choice = Validation.GetValidString();
-                Console.WriteLine("Thank You For Returning " + Choice);
+
+                Return(GetList());
+
+                //Choice = Validation.GetValidString();
+                //Console.WriteLine("Thank You For Returning " + Choice);
             }
 
 
@@ -142,34 +155,19 @@ namespace Midterm
             // Function For Option #5
             else if (Option == 5)
             {
-                string ChoiceTitle;
-                string ChoiceAuthor;
-                Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
-                Console.Write("Book Title: ");
-                ChoiceTitle = Validation.GetValidString();
-                Console.Write("Book Author: ");
-                ChoiceAuthor = Validation.GetValidString();
-                string Status = ("Available");
 
-                List<Books> NewList = new List<Books>();
-                NewList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status));
-                List<Books> DonationList = AddBook(GetList());
-                Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
-
-                // Delete Previous TextFile
-                foreach (var item in DonationList)
-                {
-
-                    File.Create(item.BTitle + item.BAuthor + item.BStatus);
-                }
-
-
-                // Populate Text File with New Information
-                foreach (var item in DonationList)
-                {
-
-                    WriteToFile(item.BTitle + ","+ item.BAuthor + "," + item.BStatus);
-                }
+                //string ChoiceTitle;
+                //string ChoiceAuthor;
+                //Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
+                //Console.Write("Book Title: ");
+                //ChoiceTitle = Validation.GetValidString();
+                //Console.Write("Book Author: ");
+                //ChoiceAuthor = Validation.GetValidString();
+                //string Status = ("Available");
+                //List<Books> NewList = new List<Books>();
+                //NewList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status));
+                //List<Books> DonationList = AddBook(GetList());
+                //Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
             }
         }
 
@@ -185,15 +183,17 @@ namespace Midterm
             StreamReader reader = new StreamReader("../../TextFile1.txt ");
             //this is one line from text file or one book
             char[] comma = { ',' };
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 14; i++)
 
             {
                 string line = reader.ReadLine();
+                //string[] book = new string[4];
                 string[] book = line.Split(comma);
-                string Author = book[0];
-                string Title = book[1];
+                string Title = book[0];
+                string Author = book[1];
                 string Status = book[2];
-                Catalogue.Add(new Books(Author, Title, Status));
+                string DueDate = book[3];
+                Catalogue.Add(new Books(Title, Author, Status, DueDate));
             }
             reader.Close();
             return Catalogue;
@@ -209,6 +209,7 @@ namespace Midterm
                 Console.WriteLine("Title:\t" + item.BTitle);
                 Console.WriteLine("Author:\t" + item.BAuthor);
                 Console.WriteLine("Status:\t" + item.BStatus);
+                Console.WriteLine("Due Date:\t" + item.BDueDate);
                 Console.WriteLine("\n=====================================\n");
             }
         }
@@ -216,25 +217,100 @@ namespace Midterm
 
 
         // Method to Add a Book
-        public static List<Books> AddBook(List<Books> InputList)
-        {
-            string Title = Validation.GetValidString();
-            string Author = Validation.GetValidString();
-            string Status = "Available";
-            InputList.Add(new Books(Title, Author, Status));
-            return InputList;
-        }
+        //public static List<Books> AddBook(List<Books> InputList)
+        //{
+        //    string Title = Validation.GetValidString();
+        //    string Author = Validation.GetValidString();
+        //    string Status = "Available";
+        //    InputList.Add(new Books(Title, Author, Status));
+        //    return InputList;
+        //}
 
 
         // Method To Write To File
-        public static void WriteToFile(string input)
+        public static void WriteToText(List<Books> inputList)
         {
-            StreamWriter sw = new StreamWriter("../../TextFile1.txt", false);  // Relative Path
-            sw.WriteLine(input);
-            sw.Close();  // Resource Management
+            StreamWriter sw = new StreamWriter("../../TextFile1.txt", false);
+
+            foreach (var item in inputList)
+            {
+                sw.WriteLine(item.BTitle + "," + item.BAuthor + "," + item.BStatus + ","
+                    + item.BDueDate);
+
+            }
+            sw.Close();
         }
 
 
+
+        public static void Checkout(List<Books> inputCatalogue)
+        {
+            Console.Write("Check out: ");
+            string ItemToCheckOut = Console.ReadLine().ToLower(); // add validation here
+            DateTime myDateTime = new DateTime();
+            myDateTime = DateTime.Now;
+            int count = 0;
+            foreach (var item in inputCatalogue)
+            {
+                string Titlelower = item.BTitle.ToLower();
+                if (Titlelower == ItemToCheckOut && !(item.BStatus == "Checked-out"))
+                {
+                    item.BStatus = "Checked-out";
+                    item.BDueDate = myDateTime.AddDays(14).ToShortDateString();
+                    Console.WriteLine($"{item.BTitle} is checked out.");
+                    Console.WriteLine($"and is due on {item.BDueDate}");
+                }
+                else
+                {
+                    count++;
+                }
+
+            }
+            if (count == inputCatalogue.Count)
+            {
+                Console.WriteLine("not available");
+            }
+
+            WriteToText(inputCatalogue);
+
+        }
+
+
+        public static void Return(List<Books> inputCatalogue)
+        {
+            Console.Write("Return: ");
+            string ItemToReturn = Console.ReadLine().ToLower();
+            DateTime myDateTime = new DateTime();
+            myDateTime = DateTime.Now;
+            int count = 0;
+            foreach (var item in inputCatalogue)
+            {
+                string Titlelower = item.BTitle.ToLower();
+                if (Titlelower == ItemToReturn && !(item.BStatus == "Avaiable"))
+                {
+                    item.BStatus = "Available";
+                    item.BDueDate = "N/A";
+                    Console.WriteLine($"thank you for returning {item.BTitle}.");
+                    //if (Convert.ToDouble(item.BDueDate) > Convert.ToDouble(myDateTime))
+                    //{
+                    //    Console.WriteLine("your item is late you owe us money");
+                    //}
+                }
+                else
+                {
+                    count++;
+                }
+
+            }
+            if (count == inputCatalogue.Count)
+            {
+                Console.WriteLine("that book is already returned or not in our system");
+            }
+
+            WriteToText(inputCatalogue);
+
+
+        }
 
 
 
@@ -261,5 +337,3 @@ namespace Midterm
         //}
     }
 }
-
-
