@@ -9,50 +9,70 @@ namespace Midterm
     class Books
     {
 
-        string Author;
         string Title;
+        string Author;
         string Status;
-        public string BAuthor
-        {
-            get
-            {
-                return Author;
-            }
-            set
-            {
-                Author = value;
-            }
-        }
+        string DueDate;
+
         public string BTitle
         {
             get
             {
                 return Title;
             }
+
             set
             {
                 Title = value;
             }
         }
+
+        public string BAuthor
+        {
+            get
+            {
+                return Author;
+            }
+
+            set
+            {
+                Author = value;
+            }
+        }
+
         public string BStatus
         {
             get
             {
                 return Status;
             }
+
             set
             {
                 Status = value;
             }
         }
-        public Books()
+
+        public string BDueDate
         {
+            get
+            {
+                return DueDate;
+            }
+
+            set
+            {
+                DueDate = value;
+            }
         }
-        public Books(string inputAuthor, string inputTitle, string inputStatus)
+
+        public Books(string inputTitle, string inputAuthor, string inputStatus, string inputDueDAte)
         {
-            BAuthor = inputAuthor;
             BTitle = inputTitle;
+            BAuthor = inputAuthor;
             BStatus = inputStatus;
+            BDueDate = inputDueDAte;
         }
+
     }
 }

@@ -1,14 +1,14 @@
-﻿Harry Potter and the Curse,J.K.Rowling,Available,Checked Out
-Red Rain,R.L.Stine,Available,Checked Out
-Sixteenth Seduction,James Patterson,Available,Checked Out
-Thirteen Reasons Why,Jay Asher,Available,Checked Out 
-The Third Wave,Steve Case,Available,Checked Out
-Cat and the Hat,Dr.Seuss,Available,Checked Out
-Green Eggs and Ham,Dr.Seuss,Available,Checked Out
-How the Grinch Stole Christmas,Dr.Seuss,Available,Checked Out
-Anything is Possible,Elizabeth Strout,Available,Checked Out
-The Secrets of My Life,Caitlyn Jenner,Available,Checked Out
-Come Sundown,Nora Roberts,Available,Checked Out
-The Black Book,James Patterson,Available,Checked Out
-Hundred Years of Solitude,Gabiel Garcia Marquez,Available,Checked Out
-Gone Girl,Gillian Flynn,Available,Checked Out
+Harry Potter and the Curse,J.K.Rowling,Available,N/A
+Red Rain,R.L.Stine,Available,N/A
+Sixteenth Seduction,James Patterson,Available,N/A
+Thirteen Reasons Why,Jay Asher,Available,N/A
+The Third Wave,Steve Case,Available,N/A
+Cat and the Hat,Dr.Seuss,Available,N/A
+Green Eggs and Ham,Dr.Seuss,Available,N/A
+How the Grinch Stole Christmas,Dr.Seuss,Available,N/A
+Anything is Possible,Elizabeth Strout,Checked-out,5/13/2017
+The Secrets of My Life,Caitlyn Jenner,Available,N/A
+Come Sundown,Nora Roberts,Checked-out,5/13/2017
+The Black Book,James Patterson,Checked-out,5/13/2017
+Hundred Years of Solitude,Gabiel Garcia Marquez,Available,N/A
+Gone Girl,Gillian Flynn,Available,N/A
