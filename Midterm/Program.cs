@@ -150,10 +150,26 @@ namespace Midterm
                 Console.Write("Book Author: ");
                 ChoiceAuthor = Validation.GetValidString();
                 string Status = ("Available");
+
                 List<Books> NewList = new List<Books>();
                 NewList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status));
                 List<Books> DonationList = AddBook(GetList());
                 Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
+
+                // Delete Previous TextFile
+                foreach (var item in DonationList)
+                {
+
+                    File.Create(item.BTitle + item.BAuthor + item.BStatus);
+                }
+
+
+                // Populate Text File with New Information
+                foreach (var item in DonationList)
+                {
+
+                    WriteToFile(item.BTitle + ","+ item.BAuthor + "," + item.BStatus);
+                }
             }
         }
 
@@ -213,10 +229,13 @@ namespace Midterm
         // Method To Write To File
         public static void WriteToFile(string input)
         {
-            StreamWriter sw = new StreamWriter("../../TextFile1.txt", true);  // Relative Path
+            StreamWriter sw = new StreamWriter("../../TextFile1.txt", false);  // Relative Path
             sw.WriteLine(input);
             sw.Close();  // Resource Management
         }
+
+
+
 
 
         //// Method to Get Book Status
