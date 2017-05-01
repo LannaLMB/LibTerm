@@ -1,7 +1,7 @@
 ﻿/*  Midterm Project
  *  Library Terminal
  *  Group:  Lanna, Alex, Theresa
- *  Date Last Modified:  4/30/17
+ *  Date Last Modified:  5/01/17
  */
 
 
@@ -67,17 +67,11 @@ namespace Midterm
 
 
 
-
-
         // **********  Methods Begin Here  ********** \\
-
-
-
 
         // Method to Get User Option of What They Would Like to Do Within The Menu
         public static void GetOption()
         {
-
             int Option;
 
             // User Chooses to Check In a Book, Check Out a Book, Donate a Book, or Search for a Book
@@ -86,20 +80,19 @@ namespace Midterm
             // Print List of Menu Values with Select Numbers
             for (int i = 0; i < MenuValues.Length; i++)
             {
-
                 Console.WriteLine($"{i + 1}.)\t{MenuValues[i]}");
             }
+
 
 
             // Get User Choice
             Console.Write("\n\nPlease Type the Number Associated With The Option You'd Like\n\n   ----->  ");
 
-
             // User Choice Output
-            string Choice;
             Option = Validation.GetRange(1, 5);
             Console.WriteLine();
             Console.WriteLine($"\nYou Chose The Option To {MenuValues[Option - 1]}.\n\n");
+
 
 
             // ***** Functions For Each Option ***** //
@@ -111,7 +104,6 @@ namespace Midterm
                 Console.WriteLine("-------------------------------------------------------------\n");
 
 
-
                 // Show User List of Books to Choose From
                 PrintList(GetList());
                 Console.Write("\n---->  ");
@@ -120,7 +112,6 @@ namespace Midterm
 
                 //Choice = Validation.GetValidString();
                 //Console.WriteLine("\nThank You For Checking Out " + Choice + ".  The Due Date is Two Weeks From Today's Date.");
-
 
             }
 
@@ -142,49 +133,25 @@ namespace Midterm
             // Function For Option #3
             else if (Option == 3)
             {
-                Console.WriteLine("Please Type in The Name of The Book You Are Looking For:\n---->  ");
-                Choice = Validation.GetValidString();
+                SearchbyKeyWord(GetList());
             }
 
 
             // Function For Option #4
             else if (Option == 4)
             {
-                //Validation.GetValidString(SearchByAuthor());
-                //Console.WriteLine("Please Type in The Author of The Book You Are Looking For:\n---->  ");
-                //Choice = Validation.GetValidString(SearchByAuthor());
+                // Call Method to Search By Author
+                SearchByAuthor(GetList());
+
             }
 
 
             // Function For Option #5
             else if (Option == 5)
             {
-            //    Books Checkout = new Books();
-            //    Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
-            //    Books Bo = new Books();
-            //    Bo = Checkout;
-            //    string input = Console.ReadLine();
-            //    WriteToFile(input);
+                WriteToText(AddBooks(GetList()));
             }
         }
-
-
-
-
-        public static void WriteToFile(string input)
-        {
-            StreamWriter sw = new StreamWriter("../../TextFile1.txt", true);
-            sw.WriteLine(input);
-            sw.Close();
-            string filelocation = "../../TestFile1.txt";
-            StreamWriter writer = new StreamWriter(filelocation);
-            List<String> LS = new List<string>();
-            writer.Close();
-            return;
-        }
-
-
-
 
 
 
@@ -198,7 +165,8 @@ namespace Midterm
 
             //this is one line from text file or one book
             char[] comma = { ',' };
-            for (int i = 0; i < 14; i++)
+            var lineCount = File.ReadLines("../../OurDataBase.txt").Count();
+            for (int i = 0; i < lineCount; i++)
 
             {
                 string line = reader.ReadLine();
@@ -216,7 +184,6 @@ namespace Midterm
 
 
 
-
         // Method To Print List
         public static void PrintList(List<Books> InputList)
         {
@@ -229,19 +196,6 @@ namespace Midterm
                 Console.WriteLine("\n=====================================\n");
             }
         }
-
-
-
-        // Method to Add a Book
-        //public static List<Books> AddBook(List<Books> InputList)
-        //{
-        //    string Title = Validation.GetValidString();
-        //    string Author = Validation.GetValidString();
-        //    string Status = "Available";
-        //    InputList.Add(new Books(Title, Author, Status));
-        //    return InputList;
-        //}
-
 
 
 
@@ -285,7 +239,7 @@ namespace Midterm
 
 
 
-        // This Returns a Book and Updates the Text File
+        // This Method Returns a Book and Updates the Text File
         public static void Return(List<Books> inputCatalogue)
         {
             Console.Write("Please Enter The Name Of The Book You Would Like To Return: ");
@@ -338,10 +292,81 @@ namespace Midterm
 
 
 
-        // Search for Book by Author
-        //public static string SearchByAuthor(List<Books> inputCatalogue)
+        // Method to Search By Title
+        public static void SearchbyKeyWord(List<Books> inputCatalogue)
+        {
+            Console.WriteLine("Enter a Keyword to Search for a Book By Title: ");
+            int count = 0;
+            char[] space = { ' ' };
+            string KeyWordSearch = Console.ReadLine().ToUpper();
+
+            foreach (var item in inputCatalogue)
+            {
+                string titleToUpper = item.BTitle.ToUpper();
+                if (titleToUpper.Split(space).Contains(KeyWordSearch))
+                {
+                    Console.WriteLine("Yes We Have: ");
+
+                    Console.WriteLine("Title:\t" + item.BTitle);
+                    Console.WriteLine("Author:\t" + item.BAuthor);
+                    Console.WriteLine("Status:\t" + item.BStatus);
+                    Console.WriteLine("DueDate:\t" + item.BDueDate);
+                    Console.WriteLine("\n=====================================\n");
+                }
+
+                else
+                {
+                    count++;
+                }
+            }
+
+            if (count == inputCatalogue.Count)
+            {
+                Console.WriteLine("That Does Not Match Anything in Our Records");
+            }
+        }
+
+
+
+        //// Search for Book by Author
+        public static void SearchByAuthor(List<Books> inputCatalogue)
+        {
+            Console.WriteLine("Enter a Keyword to Search for a Book By Author: ");
+            int count = 0;
+            char[] space = { ' ' };
+            string KeyWordSearch = Console.ReadLine().ToUpper();
+
+            foreach (var item in inputCatalogue)
+            {
+                string authorToUpper = item.BAuthor.ToUpper();
+                if (authorToUpper.Split(space).Contains(KeyWordSearch))
+                {
+                    Console.WriteLine("Yes We Have: ");
+
+                    Console.WriteLine("Title:\t" + item.BTitle);
+                    Console.WriteLine("Author:\t" + item.BAuthor);
+                    Console.WriteLine("Status:\t" + item.BStatus);
+                    Console.WriteLine("DueDate:\t" + item.BDueDate);
+                    Console.WriteLine("\n=====================================\n");
+                }
+
+                else
+                {
+                    count++;
+                }
+            }
+
+            if (count == inputCatalogue.Count)
+            {
+                Console.WriteLine("That Does Not Match Anything in Our Records");
+            }
+        }
+
+
+
+        //public static void SearchByAuthor(List<Books> inputCatalogue)
         //{
-        //    Console.Write("Search by Author: ");
+        //    Console.Write("Please Type in The Author of The Book You Are Looking For:\n---->  ");
         //    string AuthorSearch = Console.ReadLine().ToUpper();
 
         //    int count = 0;
@@ -372,5 +397,28 @@ namespace Midterm
         //    }
         //    WriteToText(inputCatalogue);
         //}
+
+
+
+        // Method to Add Book/Donate Option
+        public static List<Books> AddBooks(List<Books> inputList)
+        {
+
+            string ChoiceTitle;
+            string ChoiceAuthor;
+            Console.WriteLine("Please Enter in The Information For The Book You Are Donating:\n");
+            Console.Write("Book Title: ");
+            ChoiceTitle = Validation.GetValidString();
+            Console.Write("Book Author: ");
+            ChoiceAuthor = Validation.GetValidString();
+            string Status = "Available";
+            string DueDate = "N/A";
+
+            inputList.Add(new Books(ChoiceTitle, ChoiceAuthor, Status, DueDate));
+            Console.WriteLine("Thank You For Donating " + ChoiceTitle + " By " + ChoiceAuthor);
+
+            return inputList;
+
+        }
     }
 }

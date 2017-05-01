@@ -18,13 +18,9 @@ namespace Midterm
         }
 
         public static SoundPlayer Play()
-    {
-        throw new NotImplementedException();
+        {
+            throw new NotImplementedException();
+        }
     }
-
-
-    }
-
-
 }
 

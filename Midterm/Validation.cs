@@ -67,8 +67,7 @@ namespace Midterm
                 Input = Console.ReadLine().ToUpper();
             }
 
-            return Input;
-                
+            return Input;          
         }
 
 
